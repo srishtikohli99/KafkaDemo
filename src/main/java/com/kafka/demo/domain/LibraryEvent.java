@@ -13,14 +13,14 @@ public class LibraryEvent {
     private Book book;
     private LibraryEventType libraryEventType;
 
-    public Integer getLibraryEventId() {
-        return libraryEventId;
-    }
+//    public Integer getLibraryEventId() {
+//        return libraryEventId;
+//    }
 
-    public void setLibraryEventId(Integer libraryEventId) {
-        this.libraryEventId = libraryEventId;
-    }
-
-    public void setLibraryEventType(LibraryEventType aNew) {
-    }
+//    public void setLibraryEventId(Integer libraryEventId) {
+//        this.libraryEventId = libraryEventId;
+//    }
+//
+//    public void setLibraryEventType(LibraryEventType aNew) {
+//    }
 }

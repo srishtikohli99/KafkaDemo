@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,4 +39,21 @@ public class LibraryEventsController {
     }
 
     //PUT
+    @PutMapping("/v1/libraryevent")
+    public ResponseEntity<?> putLibraryEvent(@RequestBody LibraryEvent libraryEvent) throws JsonProcessingException, ExecutionException, InterruptedException {
+
+        logger.info("Before sendLibraryEvent");
+        if(libraryEvent.getLibraryEventId() == null){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please supply libraryEventId");
+        }
+        //libraryEventProducer.sendLibraryEvent(libraryEvent); //for async
+        //SendResult<Integer, String> sendResult = libraryEventProducer.sendLibraryEventSynchronous(libraryEvent); //for sync
+        //logger.info("Send Result is {} ", sendResult.toString());
+        libraryEvent.setLibraryEventType(LibraryEventType.UPDATE);
+        libraryEventProducer.sendLibraryEvent_App2(libraryEvent); //for sync
+        logger.info("After sendLibraryEvent");
+        return ResponseEntity.status(HttpStatus.CREATED).body(libraryEvent);
+    }
+
+
 }
